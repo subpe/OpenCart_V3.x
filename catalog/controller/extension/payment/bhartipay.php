@@ -24,7 +24,7 @@ class ControllerExtensionPaymentBhartiPay extends Controller
     {
         require_once(DIR_SYSTEM . 'bppg_helper.php');
         if (!$this->config->get('payment_bhartipay_test')) {
-            $data['action'] = 'http://merchant.bhartipay.com/crm/jsp/paymentrequest';
+            $data['action'] = 'https://merchant.bhartipay.com/crm/jsp/paymentrequest';
         } else {
             $data['action'] = 'http://uat.bhartipay.com/crm/jsp/paymentrequest';
         }
