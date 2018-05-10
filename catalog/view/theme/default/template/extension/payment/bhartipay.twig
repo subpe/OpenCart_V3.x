@@ -1,0 +1,35 @@
+<form action="{{ action_url }}" method="POST" class="form-horizontal" id="BPayRedirect">
+    <input type='hidden' name='PAY_ID' value="{{ PAY_ID }}" />
+    <input type='hidden' name='ORDER_ID' value="{{ ORDER_ID }}" />
+    <input type='hidden' name='RETURN_URL' value="{{ RETURN_URL }}" />
+    <input type='hidden' name='CUST_EMAIL' value="{{ CUST_EMAIL }}" />
+    <input type='hidden' name='CUST_NAME' value="{{ CUST_NAME }}" />
+    <input type='hidden' name='CUST_STREET_ADDRESS1' value="{{ CUST_STREET_ADDRESS1 }}" />
+    <input type='hidden' name='CUST_CITY' value="{{ CUST_CITY }}" />
+    <input type='hidden' name='CUST_STATE' value="{{ CUST_STATE }}" />
+    <input type='hidden' name='CUST_COUNTRY' value="{{ CUST_COUNTRY }}" />
+    <input type='hidden' name='CUST_ZIP' value="{{ CUST_ZIP }}" />
+    <input type='hidden' name='CUST_PHONE' value="{{ CUST_PHONE }}" />
+    <input type='hidden' name='CURRENCY_CODE' value="{{ CURRENCY_CODE }}" />
+    <input type='hidden' name='AMOUNT' value="{{ AMOUNT }}" />
+    <input type='hidden' name='PRODUCT_DESC' value="{{ PRODUCT_DESC }}" />
+    <input type='hidden' name='CUST_SHIP_STREET_ADDRESS1' value="{{ CUST_SHIP_STREET_ADDRESS1 }}" />
+    <input type='hidden' name='CUST_SHIP_CITY' value="{{ CUST_SHIP_CITY }}" />
+    <input type='hidden' name='CUST_SHIP_STATE' value="{{ CUST_SHIP_STATE }}" />
+    <input type='hidden' name='CUST_SHIP_COUNTRY' value="{{ CUST_SHIP_COUNTRY }}" />
+    <input type='hidden' name='CUST_SHIP_ZIP' value="{{ CUST_SHIP_ZIP }}" />
+    <input type='hidden' name='CUST_SHIP_PHONE' value="{{ CUST_SHIP_PHONE }}" />
+    <input type='hidden' name='CUST_SHIP_NAME' value="{{ CUST_SHIP_NAME }}" />
+    <input type='hidden' name='TXNTYPE' value="{{ TXNTYPE }}" />
+    <input type='hidden' name='HASH' value="{{ HASH }}" />
+</form>
+<div class="buttons">
+    <div class="pull-right">
+        <input type="button" value="{{ button_confirm }}" id="button-confirm" class="btn btn-primary" />
+    </div>
+</div>
+<script type="text/javascript"><!--
+$('#button-confirm').bind('click', function() {
+    $('#BPayRedirect').submit();
+});
+//--></script>
