@@ -1,13 +1,13 @@
 <?php
 /**
  * @package     OpenCart
- * @author      BhartiPay
- * @copyright   Copyright (c) 2018, BhartiPay Services Pvt Ltd.
+ * @author      SubPe
+ * @copyright   Copyright (c) 2018, SubPe Services Pvt Ltd.
  * @license     https://opensource.org/licenses/GPL-3.0
- * @link        https://www.bhartipay.com
+ * @link        https://www.subpe.com
  */
 
-class ControllerExtensionPaymentBhartiPay extends Controller
+class ControllerExtensionPaymentSubPe extends Controller
 {
 
     /**
@@ -23,24 +23,24 @@ class ControllerExtensionPaymentBhartiPay extends Controller
     public function index()
     {
         require_once(DIR_SYSTEM . 'bppg_helper.php');
-        if (!$this->config->get('payment_bhartipay_test')) {
-            $data['action'] = 'https://merchant.bhartipay.com/crm/jsp/paymentrequest';
+        if (!$this->config->get('payment_subpe_test')) {
+            $data['action'] = 'https://merchant.subpe.com/crm/jsp/paymentrequest';
         } else {
-            $data['action'] = 'http://uat.bhartipay.com/crm/jsp/paymentrequest';
+            $data['action'] = 'http://uat.subpe.com/crm/jsp/paymentrequest';
         }
 
         $this->load->model('checkout/order');
 
         $order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
 
-        $return_url = $this->url->link('extension/payment/bhartipay/callback', 'language=' . $this->config->get('config_language') . '&hash=' . md5($order_info['order_id'] . $order_info['total'] . $order_info['currency_code'] . $this->config->get('payment_bhartipay_salt')));
+        $return_url = $this->url->link('extension/payment/subpe/callback', 'language=' . $this->config->get('config_language') . '&hash=' . md5($order_info['order_id'] . $order_info['total'] . $order_info['currency_code'] . $this->config->get('payment_subpe_salt')));
 
         $transaction_request = new BPPGModule();
 
         /* Setting all values here */
-        $transaction_request->setPayId($this->config->get('payment_bhartipay_pay_id'));
+        $transaction_request->setPayId($this->config->get('payment_subpe_pay_id'));
         $transaction_request->setPgRequestUrl($data['action']);
-        $transaction_request->setSalt($this->config->get('payment_bhartipay_salt'));
+        $transaction_request->setSalt($this->config->get('payment_subpe_salt'));
         $transaction_request->setReturnUrl($return_url);
         $transaction_request->setCurrencyCode(356);
         $transaction_request->setTxnType('SALE');
@@ -67,12 +67,12 @@ class ControllerExtensionPaymentBhartiPay extends Controller
         $postdata = $transaction_request->createTransactionRequest();
         $postdata['action_url'] = $data['action'];
         // echo "<pre>";var_dump($postdata);die();
-        return $this->load->view('extension/payment/bhartipay', $postdata);
+        return $this->load->view('extension/payment/subpe', $postdata);
     }
 
     public function callback()
     {
-        $this->load->language('extension/payment/bhartipay');
+        $this->load->language('extension/payment/subpe');
 
         if (isset($this->request->post['ORDER_ID'])) {
             $order_id = $this->request->post['ORDER_ID'];
@@ -91,7 +91,7 @@ class ControllerExtensionPaymentBhartiPay extends Controller
                 $error = $this->language->get('text_unable');
             } elseif ($this->request->post['STATUS'] != 'Captured') {
                 $error = $this->language->get('text_declined');
-            } elseif ($this->request->get['hash'] != md5($order_info['order_id'] . $order_info['total'] . $order_info['currency_code'] . $this->config->get('payment_bhartipay_salt'))) {
+            } elseif ($this->request->get['hash'] != md5($order_info['order_id'] . $order_info['total'] . $order_info['currency_code'] . $this->config->get('payment_subpe_salt'))) {
                 $error = $this->language->get('text_unable');
             }
         } else {
@@ -134,7 +134,7 @@ class ControllerExtensionPaymentBhartiPay extends Controller
 
             $this->response->setOutput($this->load->view('common/success', $data));
         } else {
-            $this->model_checkout_order->addOrderHistory($order_id, $this->config->get('payment_bhartipay_order_status_id'));
+            $this->model_checkout_order->addOrderHistory($order_id, $this->config->get('payment_subpe_order_status_id'));
 
             $this->response->redirect($this->url->link('checkout/success', 'language=' . $this->config->get('config_language')));
         }
