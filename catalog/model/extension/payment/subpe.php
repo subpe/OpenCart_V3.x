@@ -4,7 +4,7 @@
  * @author      SubPe
  * @copyright   Copyright (c) 2018, SubPe Services Pvt Ltd.
  * @license     https://opensource.org/licenses/GPL-3.0
- * @link        https://www.subpe.com
+ * @link        https://www.subpe.in
  */
 
 /**

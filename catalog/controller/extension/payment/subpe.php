@@ -4,7 +4,7 @@
  * @author      SubPe
  * @copyright   Copyright (c) 2018, SubPe Services Pvt Ltd.
  * @license     https://opensource.org/licenses/GPL-3.0
- * @link        https://www.subpe.com
+ * @link        https://www.subpe.in
  */
 
 class ControllerExtensionPaymentSubPe extends Controller
@@ -24,9 +24,9 @@ class ControllerExtensionPaymentSubPe extends Controller
     {
         require_once(DIR_SYSTEM . 'bppg_helper.php');
         if (!$this->config->get('payment_subpe_test')) {
-            $data['action'] = 'https://merchant.subpe.com/crm/jsp/paymentrequest';
+            $data['action'] = 'https://payments.subpe.in/crm/jsp/paymentrequest';
         } else {
-            $data['action'] = 'http://uat.subpe.com/crm/jsp/paymentrequest';
+            $data['action'] = 'http://uat.subpe.in/crm/jsp/paymentrequest';
         }
 
         $this->load->model('checkout/order');
